@@ -1,0 +1,28 @@
+{
+  "name": "eslint-plugin-material-ui-unused-classes",
+  "version": "1.0.0",
+  "description": "eslint plugin to detect unused material-ui styling classes",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jens-ox/eslint-plugin-material-ui-unused-classes.git"
+  },
+  "keywords": [
+    "eslint",
+    "material-ui"
+  ],
+  "author": "Jens Ochsenmeier",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jens-ox/eslint-plugin-material-ui-unused-classes/issues"
+  },
+  "homepage": "https://github.com/jens-ox/eslint-plugin-material-ui-unused-classes#readme",
+  "dependencies": {
+    "@typescript-eslint/parser": "^4.9.0",
+    "eslint": "^7.14.0",
+    "mocha": "^8.2.1"
+  }
+}
