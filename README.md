@@ -17,7 +17,7 @@ module.exports = {
   // ...
   plugins: [
     // ...
-    'mui-unused-classes/recommended'
+    'mui-unused-classes'
   ]
 }
 ```
@@ -29,10 +29,10 @@ module.exports = {
   // ...
   plugins: [
     // ...
-    'mui-unused-classes/recommended'
+    'mui-unused-classes'
   ],
   rules: {
-    'mui-unused-classes/warn-unused-classes': 2
+    'mui-unused-classes/unused-classes': 2
   }
 }
 ```
