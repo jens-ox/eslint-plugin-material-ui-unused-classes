@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/jens-ox/eslint-plugin-material-ui-unused-classes#readme",
   "peerDependencies": {
-    "eslint": "^7.14.0"
+    "eslint": "^7.14.0 || ^8.0.0"
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^4.9.0",
