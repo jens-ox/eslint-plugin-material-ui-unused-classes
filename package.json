@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-mui-unused-classes",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "eslint plugin to detect unused material-ui styling classes",
   "main": "index.js",
   "scripts": {
@@ -21,12 +21,12 @@
   },
   "homepage": "https://github.com/jens-ox/eslint-plugin-material-ui-unused-classes#readme",
   "peerDependencies": {
-    "eslint": "^7.14.0"
+    "eslint": "*"
   },
   "devDependencies": {
-    "@typescript-eslint/parser": "^4.9.0",
-    "eslint": "^7.14.0",
-    "mocha": "^8.2.1",
-    "typescript": "^4.1.2"
+    "@typescript-eslint/parser": "^5.48.0",
+    "eslint": "^8.31.0",
+    "mocha": "^10.2.0",
+    "typescript": "^4.9.4"
   }
 }

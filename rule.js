@@ -28,12 +28,15 @@ module.exports = {
     type: 'problem',
   },
   create: function rule(context) {
-    const usedClasses = {};
     const definedClasses = {};
+    const potentialUses = []
+    let hookName = ''
+    let instanceName = ''
 
     return {
       CallExpression(node) {
         if (node.callee.name === 'makeStyles') {
+          hookName = node.parent.id.name
           const styles = node.arguments[0];
 
           if (styles && styles.type === 'ArrowFunctionExpression') {
@@ -74,13 +77,19 @@ module.exports = {
             }
           }
         }
+        if (hookName !== '' && node.callee.name === hookName) {
+          instanceName = node.parent.id.name
+        }
       },
 
       MemberExpression(node) {
-        if (node.object.type === 'Identifier' && node.object.name === 'classes') {
+        if (node.object.type === 'Identifier') {
           const whichClass = getBasicIdentifier(node.property);
           if (whichClass) {
-            usedClasses[whichClass] = true;
+            potentialUses.push({
+              instanceName: node.object.name,
+              whichClass
+            })
           }
           return;
         }
@@ -88,11 +97,6 @@ module.exports = {
         const classIdentifier = getBasicIdentifier(node.property);
         if (!classIdentifier) {
           // props['foo' + bar].baz
-          return;
-        }
-
-        if (classIdentifier !== 'classes') {
-          // props.foo.bar
           return;
         }
 
@@ -123,14 +127,18 @@ module.exports = {
 
         const parentClassIdentifier = getBasicIdentifier(parent.property);
         if (parentClassIdentifier) {
-          usedClasses[parentClassIdentifier] = true;
+          potentialUses.push({
+            instanceName: node.object.name,
+            whichClass: parentClassIdentifier
+          })
         }
       },
       'Program:exit': () => {
+        const confirmedUses = potentialUses.filter((p) => p.instanceName === instanceName).map((p) => p.whichClass)
         // Now we know all of the defined classes and used classes, so we can
         // see if there are any defined classes that are not used.
         Object.keys(definedClasses).forEach((definedClassKey) => {
-          if (!usedClasses[definedClassKey]) {
+          if (!confirmedUses.includes(definedClassKey)) {
             context.report(
               definedClasses[definedClassKey],
               `Class \`${definedClassKey}\` is unused`,
