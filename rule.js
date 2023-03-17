@@ -54,6 +54,11 @@ module.exports = {
                   stylesObj = bodyNode.argument;
                 }
               });
+            } else if (
+              body.type === 'CallExpression' &&
+              body.callee.name === 'createStyles' &&
+              body.arguments[0].type === 'ObjectExpression') {
+              stylesObj = body.arguments[0]
             }
 
             if (stylesObj) {

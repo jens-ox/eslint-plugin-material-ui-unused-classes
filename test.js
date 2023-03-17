@@ -57,6 +57,20 @@ ruleTester.run('warn-unused-classes', rule, {
       const muiClasses = useMuiClasses()
       return <div className={muiClasses.testClass}>test</div>
     }`,
+
+    // valid createStyles case
+    `const useStyles = makeStyles(theme =>
+      createStyles({
+        usedClass: {
+          backgroundColor: 'hotpink',
+        },
+      }),
+    );
+    
+    export const Component = () => {
+      const classes = useStyles();
+      return <div className={classes.usedClass}>test</div>;
+    };`
   ],
   invalid: [
     // vanilla - hook is named `useStyles`, instantiated as `classes`
@@ -127,6 +141,27 @@ ruleTester.run('warn-unused-classes', rule, {
       errors: [{
         message: 'Class `testClass` is unused'
       }]
+    },
+
+    // invalid case using createStyles
+    {
+      code: ` 
+        const useStyles = makeStyles(theme =>
+          createStyles({
+            testClass: {
+              backgroundColor: 'red',
+            },
+            usedClass: {
+              backgroundColor: 'hotpink',
+            },
+          }),
+        );
+        
+        export const Component = () => {
+          const classes = useStyles();
+          return <div className={classes.usedClass}>test</div>;
+        };`,
+      errors: [{ message: 'Class `testClass` is unused'}]
     }
   ],
 });
