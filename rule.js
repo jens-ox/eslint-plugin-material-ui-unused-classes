@@ -35,7 +35,7 @@ module.exports = {
 
     return {
       CallExpression(node) {
-        if (node.callee.name === 'makeStyles') {
+        if (node.callee.name === 'makeStyles' && node.parent.type === 'VariableDeclarator') {
           hookName = node.parent.id.name
           const styles = node.arguments[0];
 

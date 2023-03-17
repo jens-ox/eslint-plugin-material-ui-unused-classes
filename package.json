@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-mui-unused-classes",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "eslint plugin to detect unused material-ui styling classes",
   "main": "index.js",
   "scripts": {
