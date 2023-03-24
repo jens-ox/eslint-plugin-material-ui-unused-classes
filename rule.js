@@ -77,6 +77,13 @@ module.exports = {
                   // e.g. `{ ...foo }`
                   return;
                 }
+
+                if (property.key.type === 'Literal') {
+                  // Skip literal keys for now.
+                  // e.g. `@keyframes myAnimation: { }`
+                  return;
+                }
+
                 definedClasses[property.key.name] = property;
               });
             }
